@@ -1,0 +1,4 @@
+name: LobbySystem
+version: '1.0-SNAPSHOT'
+main: de.zKinqJustin.lobbySystem.main
+api-version: '1.21'
