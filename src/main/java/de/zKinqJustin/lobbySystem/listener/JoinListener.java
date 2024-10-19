@@ -1,5 +1,6 @@
 package de.zKinqJustin.lobbySystem.listener;
 
+import de.zKinqJustin.lobbySystem.scoreboard.ServerScoreboard;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -14,6 +15,10 @@ public class JoinListener implements Listener {
         Player player = event.getPlayer();
 
         event.setJoinMessage(ChatColor.GREEN + "" + ChatColor.UNDERLINE + player.getName() + " hat den Server betreten");
+
+        player.sendMessage(ChatColor.GOLD + "Willkomen und viel vergnügen!");
+
+        new ServerScoreboard(player);
     }
 
     @EventHandler
