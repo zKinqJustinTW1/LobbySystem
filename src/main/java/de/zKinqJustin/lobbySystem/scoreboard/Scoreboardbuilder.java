@@ -48,4 +48,8 @@ public abstract class Scoreboardbuilder {
         this.scoreboard.resetScores(content);
     }
 
+    public void setTitle(String title) {
+        objective.setDisplayName(title);
+    }
+
 }

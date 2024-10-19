@@ -7,8 +7,16 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
+import org.bukkit.plugin.java.JavaPlugin;
 
 public class JoinListener implements Listener {
+
+    private final JavaPlugin plugin;
+
+    public JoinListener(JavaPlugin plugin) {
+
+        this.plugin = plugin;
+    }
 
     @EventHandler
     public void onJoin(PlayerJoinEvent event) {
@@ -18,14 +26,16 @@ public class JoinListener implements Listener {
 
         player.sendMessage(ChatColor.GOLD + "Willkomen und viel vergnügen!");
 
-        new ServerScoreboard(player);
+        plugin.getLogger().info("Creating scoreboard for " + player.getName());
+        ServerScoreboard scoreboard = new ServerScoreboard(player, plugin);
+        scoreboard.createScoreboard();
+        plugin.getLogger().info("Scoreboard created for " + player.getName());
     }
 
     @EventHandler
     public void onQuit(PlayerQuitEvent event) {
         Player player = event.getPlayer();
 
-        event.setQuitMessage(ChatColor.LIGHT_PURPLE+ "" + ChatColor.UNDERLINE + player.getName() + "hat den Server verlassen!");
+        event.setQuitMessage(ChatColor.LIGHT_PURPLE + "" + ChatColor.UNDERLINE + player.getName() + " hat den Server verlassen!");
     }
-
 }
