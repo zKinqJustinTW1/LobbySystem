@@ -8,34 +8,28 @@ import de.zKinqJustin.lobbySystem.listener.JoinListener;
 import de.zKinqJustin.lobbySystem.listener.NavigatorListener;
 import de.zKinqJustin.lobbySystem.navigator.NavigatorManager;
 import de.zKinqJustin.lobbySystem.scoreboard.ScoreboardConfig;
-import de.zKinqJustin.lobbySystem.scoreboard.ServerScoreboard;
 import de.zKinqJustin.lobbySystem.utils.Config;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
-import org.bukkit.entity.Player;
-import org.bukkit.event.EventHandler;
-import org.bukkit.event.Listener;
-import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 
 public final class main extends JavaPlugin {
 
     private static Config cfg;
-    private NavigatorManager navigatorManager;
-    private BuildModeManager buildModeManager;
 
     @Override
     public void onEnable() {
         Bukkit.getConsoleSender().sendMessage(ChatColor.GREEN + "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
         Bukkit.getConsoleSender().sendMessage(ChatColor.DARK_RED + "LobbySystem ist jetzt Einsatzbereit");
+        Bukkit.getConsoleSender().sendMessage(ChatColor.AQUA + "      made by zKinqJustinTW        ");
         Bukkit.getConsoleSender().sendMessage(ChatColor.GREEN + "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
 
         ScoreboardConfig scoreboardConfig = new ScoreboardConfig(this);
         scoreboardConfig.loadConfig();
 
-        navigatorManager = new NavigatorManager(this);
-        buildModeManager = new BuildModeManager();
+        NavigatorManager navigatorManager = new NavigatorManager(this);
+        BuildModeManager buildModeManager = new BuildModeManager();
 
         PluginManager manager = Bukkit.getPluginManager();
         getServer().getPluginManager().registerEvents(new JoinListener(this), this);
