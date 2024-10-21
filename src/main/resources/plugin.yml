@@ -4,3 +4,11 @@ main: de.zKinqJustin.lobbySystem.main
 api-version: '1.21'
 commands:
   warp:
+  build:
+    description: Schaltet den Baumodus ein oder aus
+    usage: /<command>
+    permission: lobbysystem.build
+  permissions:
+    lobbysystem.build:
+      description: Erlaubt die Verwendung des /build Befehls
+      default: op
