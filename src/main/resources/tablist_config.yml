@@ -1,0 +1,35 @@
+header:
+  - "&6Willkommen auf unserem Server!"
+  - "&eViel Spaß!"
+header-update-interval: 20 # in ticks (20 ticks = 1 second)
+
+footer:
+  - "&7Besuche unsere Website: &bwww.example.com"
+  - "&7Spieler online: &a%online_players%"
+footer-update-interval: 20 # in ticks (20 ticks = 1 second)
+
+# Ranks
+ranks:
+  owner:
+    prefix: "&4[Owner] "
+    permission: "lobbysystem.rank.owner"
+    priority: 100
+  admin:
+    prefix: "&c[Admin] "
+    permission: "lobbysystem.rank.admin"
+    priority: 90
+  mod:
+    prefix: "&2[Mod] "
+    permission: "lobbysystem.rank.mod"
+    priority: 80
+  vip:
+    prefix: "&6[VIP] "
+    permission: "lobbysystem.rank.vip"
+    priority: 70
+  default:
+    prefix: "&7"
+    permission: "lobbysystem.rank.default"
+    priority: 0
+
+# Tablist sorting (by rank priority)
+sort-by-rank: true

@@ -1,0 +1,12 @@
+exit-command: "warp spawn %player%"
+
+pos1:
+  world: ""
+  x: 0
+  y: 0
+  z: 0
+pos2:
+  world: ""
+  x: 0
+  y: 0
+  z: 0

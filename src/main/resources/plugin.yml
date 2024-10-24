@@ -7,8 +7,20 @@ commands:
   build:
     description: Schaltet den Baumodus ein oder aus
     usage: /<command>
-    permission: lobbysystem.build
-  permissions:
+  permission:
     lobbysystem.build:
       description: Erlaubt die Verwendung des /build Befehls
+      default: op
+  setpos1:
+    description: Set the first position for the lobby marker
+    usage: /<command>
+  setpos2:
+    description: Set the second position for the lobby marker
+    usage: /<command>
+  reloadcommanditems:
+    description: Reload the command items configuration
+    usage: /<command>
+  permissions:
+    lobbysystem.reloadcommanditems:
+      description: Allows reloading the command items configuration
       default: op
