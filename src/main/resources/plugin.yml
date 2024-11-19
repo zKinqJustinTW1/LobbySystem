@@ -5,12 +5,15 @@ api-version: '1.21'
 commands:
   warp:
   build:
-    description: Schaltet den Baumodus ein oder aus
-    usage: /<command>
+    description: Toggle build mode for yourself or another player
+    usage: /<command> [player]
   permission:
-    lobbysystem.build:
-      description: Erlaubt die Verwendung des /build Befehls
-      default: op
+  lobbysystem.build:
+    description: Allows toggling build mode for yourself
+    default: op
+  lobbysystem.build.others:
+    description: Allows toggling build mode for other players
+    default: op
   setpos1:
     description: Set the first position for the lobby marker
     usage: /<command>

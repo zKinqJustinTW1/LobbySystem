@@ -2,6 +2,7 @@ package de.zKinqJustin.lobbySystem.listener;
 
 import de.zKinqJustin.lobbySystem.items.CommandItemsManager;
 import de.zKinqJustin.lobbySystem.main;
+import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -34,10 +35,13 @@ public class CommandItemsListener implements Listener {
         if (event.getAction() == Action.RIGHT_CLICK_AIR || event.getAction() == Action.RIGHT_CLICK_BLOCK) {
             Player player = event.getPlayer();
             ItemStack item = event.getItem();
-            if (item != null && item.getType() == Material.ENCHANTED_GOLDEN_APPLE && item.getItemMeta().hasDisplayName()) {
-                if (player.isOp() || player.hasPermission(manager.getPermission())) {
-                    event.setCancelled(true);
-                    manager.openCommandInventory(player);
+            if (item != null && item.getType() == Material.CONDUIT && item.hasItemMeta() && item.getItemMeta().hasDisplayName()) {
+                String displayName = ChatColor.stripColor(item.getItemMeta().getDisplayName());
+                if (displayName.equals("Command Menu")) {
+                    if (player.isOp() || player.hasPermission(manager.getPermission())) {
+                        event.setCancelled(true);
+                        manager.openCommandInventory(player);
+                    }
                 }
             }
         }
@@ -45,7 +49,7 @@ public class CommandItemsListener implements Listener {
 
     @EventHandler
     public void onInventoryClick(InventoryClickEvent event) {
-        if (event.getView().getTitle().equals(plugin.getCommandItemsConfig().getConfig().getString("inventory.title"))) {
+        if (event.getView().getTitle().equals(ChatColor.translateAlternateColorCodes('&', plugin.getCommandItemsConfig().getConfig().getString("inventory.title", "Command Items")))) {
             event.setCancelled(true);
             if (event.getWhoClicked() instanceof Player) {
                 Player player = (Player) event.getWhoClicked();
