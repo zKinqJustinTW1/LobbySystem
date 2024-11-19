@@ -6,6 +6,7 @@ import org.bukkit.configuration.file.YamlConfiguration;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.Arrays;
 
 public class CommandItemsConfig {
     private final main plugin;
@@ -21,9 +22,15 @@ public class CommandItemsConfig {
         configFile = new File(plugin.getDataFolder(), "command_items.yml");
         if (!configFile.exists()) {
             configFile.getParentFile().mkdirs();
-            config = new YamlConfiguration();
-            setDefaults();
-            saveConfig();
+            try {
+                configFile.createNewFile();
+                config = new YamlConfiguration();
+                setDefaults();
+                config.save(configFile);
+            } catch (IOException e) {
+                plugin.getLogger().severe("Could not create command_items.yml!");
+                e.printStackTrace();
+            }
         } else {
             config = YamlConfiguration.loadConfiguration(configFile);
         }
@@ -36,19 +43,19 @@ public class CommandItemsConfig {
 
         config.set("items.teleport_spawn.material", "COMPASS");
         config.set("items.teleport_spawn.name", "&aTeleport to Spawn");
-        config.set("items.teleport_spawn.lore", new String[]{"&7Click to teleport to spawn"});
+        config.set("items.teleport_spawn.lore", Arrays.asList("&7Click to teleport to spawn"));
         config.set("items.teleport_spawn.slot", 0);
         config.set("items.teleport_spawn.command", "spawn %player%");
 
         config.set("items.give_diamond.material", "DIAMOND");
         config.set("items.give_diamond.name", "&bGive Diamond");
-        config.set("items.give_diamond.lore", new String[]{"&7Click to receive a diamond"});
+        config.set("items.give_diamond.lore", Arrays.asList("&7Click to receive a diamond"));
         config.set("items.give_diamond.slot", 1);
         config.set("items.give_diamond.command", "give %player% diamond 1");
 
         config.set("items.heal.material", "GOLDEN_APPLE");
         config.set("items.heal.name", "&cHeal");
-        config.set("items.heal.lore", new String[]{"&7Click to heal yourself"});
+        config.set("items.heal.lore", Arrays.asList("&7Click to heal yourself"));
         config.set("items.heal.slot", 2);
         config.set("items.heal.command", "heal %player%");
     }

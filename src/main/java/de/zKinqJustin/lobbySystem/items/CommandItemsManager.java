@@ -5,7 +5,6 @@ import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.configuration.ConfigurationSection;
-import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemFlag;
@@ -28,11 +27,13 @@ public class CommandItemsManager {
     }
 
     public void giveHotbarItem(Player player) {
-        ItemStack item = new ItemStack(Material.ENCHANTED_GOLDEN_APPLE);
+        ItemStack item = new ItemStack(Material.CONDUIT);
         ItemMeta meta = item.getItemMeta();
-        meta.setDisplayName(ChatColor.GOLD + "Command Menu");
-        meta.addEnchant(Enchantment.LURE, 1, true);
+        meta.setDisplayName(ChatColor.AQUA + "Command Menu");
         meta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
+        List<String> lore = new ArrayList<>();
+        lore.add(ChatColor.GRAY + "Right-click to open the command menu");
+        meta.setLore(lore);
         item.setItemMeta(meta);
 
         player.getInventory().setItem(8, item);
@@ -49,6 +50,15 @@ public class CommandItemsManager {
         int size = invConfig.getInt("size", 27);
         Inventory inventory = Bukkit.createInventory(null, size, title);
 
+        loadItems(inventory);
+
+        player.openInventory(inventory);
+    }
+
+    private void loadItems(Inventory inventory) {
+        slotCommands.clear();
+        inventory.clear();
+
         ConfigurationSection itemsSection = config.getConfig().getConfigurationSection("items");
         if (itemsSection != null) {
             for (String key : itemsSection.getKeys(false)) {
@@ -61,8 +71,6 @@ public class CommandItemsManager {
                 }
             }
         }
-
-        player.openInventory(inventory);
     }
 
     private ItemStack createItem(ConfigurationSection section) {
@@ -105,6 +113,5 @@ public class CommandItemsManager {
 
     public void reloadConfig() {
         config.reloadConfig();
-        slotCommands.clear();
     }
 }
